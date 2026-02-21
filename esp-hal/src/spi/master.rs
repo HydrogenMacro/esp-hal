@@ -1320,7 +1320,7 @@ where
         self.driver().flush()
     }
 
-    fn driver(&self) -> Driver {
+    pub fn driver(&self) -> Driver {
         Driver {
             info: self.spi.info(),
             state: self.spi.state(),
