@@ -3561,7 +3561,7 @@ impl Driver {
     /// have been sent to the wire. If you must ensure that the whole
     /// messages was written correctly, use [`Self::flush`].
     #[cfg_attr(place_spi_master_driver_in_ram, ram)]
-    fn write(&self, words: &[u8]) -> Result<(), Error> {
+    pub fn write(&self, words: &[u8]) -> Result<(), Error> {
         let num_chunks = words.len() / FIFO_SIZE;
 
         // Flush in case previous writes have not completed yet, required as per
@@ -3674,7 +3674,7 @@ impl Driver {
 
     // Check if the bus is busy and if it is wait for it to be idle
     #[cfg_attr(place_spi_master_driver_in_ram, ram)]
-    fn flush(&self) -> Result<(), Error> {
+    pub fn flush(&self) -> Result<(), Error> {
         while self.busy() {
             // wait for bus to be clear
         }
@@ -3753,7 +3753,7 @@ impl Driver {
     }
 
     #[expect(clippy::too_many_arguments)]
-    fn setup_half_duplex(
+    pub fn setup_half_duplex(
         &self,
         is_write: bool,
         cmd: Command,
